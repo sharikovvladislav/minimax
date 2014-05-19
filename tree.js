@@ -47,7 +47,7 @@ function min(node, alpha, beta) {
         var currentNode = node.children[i];
         node.value = Math.min(node.value, max(currentNode, alpha, beta));
         beta = Math.min(beta, node.value);
-        if(node.value >= alpha) {
+        if(node.value >= beta) {
             return node.value;
         }
 
