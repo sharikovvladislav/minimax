@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <script src="tree.js"></script>
+        	<!-- for graph dracula framework -->
+        <script type="text/javascript" src="js/jquery_bob.js"></script>
+        <script type="text/javascript" src="js/raphael-min.js"></script>
+        <script type="text/javascript" src="js/dracula_graffle.js"></script>
+        <script type="text/javascript" src="js/dracula_graph.js"></script>
+        <script>
+            window.onload = function() {
+                var width = $(document).width() - 20;
+                var height = $(document).height() - 350;
+                $('#canvas').css('height', height);
+                $('#canvas').css('width', width);
+                
+                g = new Graph();
+                    
+                /* layout the graph using the Spring layout implementation */
+                var layouter = new Graph.Layout.Spring(g);
+                
+                /* draw the graph using the RaphaelJS draw implementation */
+                renderer = new Graph.Renderer.Raphael('canvas', g, width, height);
+                
+                redraw = function() {
+                    layouter.layout();
+                    renderer.draw();
+                };
+        
+                var options = {
+                    value: 3,
+                    depth: 2,
+                    isTerminal: true,
+                };
+                var node1 = new Node(options);
+                
+                var options = {
+                    value: 12,
+                    depth: 2,
+                    isTerminal: true,
+                };
+                var node2 = new Node(options);
+                
+                var options = {
+                    value: 8,
+                    depth: 2,
+                    isTerminal: true,
+                };
+                var node3 = new Node(options);
+                
+                var options = {
+                    isTerminal: false,
+                    depth: 1,
+                    isMin: true,
+                    children: [node1, node2, node3],
+                    // sure about isMin/isMax?
+                };
+                var min1 = new Node(options);
+                
+                var options = {
+                    value: 2,
+                    depth: 2,
+                    isTerminal: true,
+                };
+                var node4 = new Node(options);
+                
+                var options = {
+                    value: 3,
+                    depth: 2,
+                    isTerminal: true,
+                };
+                var node5 = new Node(options);
+                
+                var options = {
+                    value: 9,
+                    depth: 2,
+                    isTerminal: true,
+                };
+                var node6 = new Node(options);
+                
+                var options = {
+                    isMin: true,
+                    isTerminal: false,
+                    depth: 1,
+                    children: [node4, node5, node6],
+                };
+                var min2 = new Node(options);
+                
+                var options = {
+                    value: 14,
+                    depth: 2,
+                    isTerminal: true,
+                };
+                var node7 = new Node(options);
+                
+                var options = {
+                    value: 1,
+                    depth: 2,
+                    isTerminal: true,
+                };
+                var node8 = new Node(options);
+                
+                var options = {
+                    value: 8,
+                    depth: 2,
+                    isTerminal: true,
+                };
+                var node9 = new Node(options);
+                
+                var options = {
+                    isMin: true,
+                    isTerminal: false,
+                    depth: 1,
+                    children: [node7, node8, node9],
+                };
+                var min3 = new Node(options);
+                
+                var options = {
+                    isMax: true,
+                    isTerminal: false,
+                    depth: 0,
+                    children: [min1, min2, min3],
+                };
+                var max1 = new Node(options);
+                
+                //console.log(JSON.stringify(max1));
+                
+                alphaBeta(max1);
+                
+                //console.log(JSON.stringify(max1));
+            }
+        </script>
+        <style>
+            #canvas {
+                border: 2px solid #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='canvas'></div>
+    </body>
+</html>
