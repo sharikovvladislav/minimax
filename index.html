@@ -2,17 +2,235 @@
     <head>
         <script src="tree.js"></script>
         	<!-- for graph dracula framework -->
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <script type="text/javascript" src="js/jquery_bob.js"></script>
         <script type="text/javascript" src="js/raphael-min.js"></script>
         <script type="text/javascript" src="js/dracula_graffle.js"></script>
         <script type="text/javascript" src="js/dracula_graph.js"></script>
         <script>
+        var nodes = {}; 
+        var root;
+                function init() {
+                    
+                    nodes['node1'] = eval('node1');;
+                }
+        
+                function add1() {
+                    g.addNode("root", { label : "root" });
+                    
+                    g.addNode("min1", { label : "min1" });
+                    g.addNode("min2", { label : "min2" });
+                    g.addNode("min3", { label : "min3" });
+                    redraw();
+                }
+                function add2() {
+                    g.addNode("max11", { label : "max11" });
+                    g.addNode("max12", { label : "max12" });
+                    g.addNode("max21", { label : "max21" });
+                    g.addNode("max22", { label : "max22" });
+                    g.addNode("max23", { label : "max23" });
+                    g.addNode("max31", { label : "max31" });
+                    g.addNode("max32", { label : "max32" });
+                    redraw();
+                }
+                function add3() {
+                    g.addNode("min111", { label : "min111" });
+                    g.addNode("min112", { label : "min112" });
+                    g.addNode("min113", { label : "min113" });
+                    g.addNode("min121", { label : "min121" });
+                    g.addNode("min122", { label : "min122" });
+                    g.addNode("min123", { label : "min123" });
+                    g.addNode("min211", { label : "min211" });
+                    g.addNode("min221", { label : "min221" });
+                    g.addNode("min222", { label : "min222" });
+                    g.addNode("min223", { label : "min223" });
+                    g.addNode("min231", { label : "min231" });
+                    g.addNode("min232", { label : "min232" });
+                    g.addNode("min311", { label : "min311" });
+                    g.addNode("min312", { label : "min312" });
+                    g.addNode("min321", { label : "max321" });
+                    redraw();
+                }
+
+                function add4() {
+                    g.addNode("node1", { label : "node1" });
+                    g.addNode("node2", { label : "node2" });
+                    g.addNode("node3", { label : "node3" });
+                    g.addNode("node4", { label : "node4" });
+                    g.addNode("node5", { label : "node5" });
+                    g.addNode("node6", { label : "node6" });
+                    g.addNode("node7", { label : "node7" });
+                    g.addNode("node8", { label : "node8" });
+                    g.addNode("node9", { label : "node9" });
+                    g.addNode("node10", { label : "node10" });
+                    g.addNode("node11", { label : "node11" });
+                    g.addNode("node12", { label : "node12" });
+                    g.addNode("node13", { label : "node13" });
+                    g.addNode("node14", { label : "node14" });
+                    g.addNode("node15", { label : "node15" });
+                    g.addNode("node16", { label : "node16" });
+                    g.addNode("node17", { label : "node17" });
+                    g.addNode("node18", { label : "node18" });
+                    g.addNode("node19", { label : "node19" });
+                    g.addNode("node20", { label : "node20" });
+                    g.addNode("node21", { label : "node21" });
+                    g.addNode("node22", { label : "node22" });
+                    g.addNode("node23", { label : "node23" });
+                    g.addNode("node24", { label : "node24" });
+                    g.addNode("node25", { label : "node25" });
+                    g.addNode("node26", { label : "node26" });
+                    g.addNode("node27", { label : "node27" });
+                    g.addNode("node28", { label : "node28" });
+                    g.addNode("node29", { label : "node29" });
+                    g.addNode("node30", { label : "node30" });
+                    g.addNode("node31", { label : "node31" });
+                    g.addNode("node32", { label : "node32" });
+                    g.addNode("node33", { label : "node33" });
+                    g.addNode("node34", { label : "node34" });
+                    g.addNode("node35", { label : "node35" });
+                    g.addNode("node36", { label : "node36" });
+                    redraw();
+                }
+                
+                function add5() {
+                    g.addEdge("root", "min1");
+                    g.addEdge("root", "min2");
+                    g.addEdge("root", "min3"); 
+                    
+                    g.addEdge("min1", "max11"); 
+                    g.addEdge("min1", "max12"); 
+                    g.addEdge("min2", "max21"); 
+                    g.addEdge("min2", "max22"); 
+                    g.addEdge("min2", "max23"); 
+                    g.addEdge("min3", "max31"); 
+                    g.addEdge("min3", "max32"); 
+                    
+                    g.addEdge("max11", "min111"); 
+                    g.addEdge("max11", "min112"); 
+                    g.addEdge("max11", "min113"); 
+                    g.addEdge("max12", "min121"); 
+                    g.addEdge("max12", "min122"); 
+                    g.addEdge("max12", "min123"); 
+                    g.addEdge("max21", "min211"); 
+                    g.addEdge("max22", "min221"); 
+                    g.addEdge("max22", "min222"); 
+                    g.addEdge("max22", "min223"); 
+                    g.addEdge("max23", "min231"); 
+                    g.addEdge("max23", "min232");
+                    g.addEdge("max31", "min311");
+                    g.addEdge("max31", "min312");
+                    g.addEdge("max32", "min321");
+                    
+                    g.addEdge("min111", "node1");
+                    g.addEdge("min111", "node2");
+                    g.addEdge("min112", "node3");
+                    g.addEdge("min112", "node4");
+                    g.addEdge("min113", "node5");
+                    g.addEdge("min113", "node6");
+                    g.addEdge("min113", "node7");
+                    g.addEdge("min121", "node8");
+                    g.addEdge("min121", "node9");
+                    g.addEdge("min122", "node10");
+                    g.addEdge("min122", "node11");
+                    g.addEdge("min122", "node12");
+                    g.addEdge("min123", "node13");
+                    g.addEdge("min123", "node14");
+                    g.addEdge("min211", "node15");
+                    g.addEdge("min211", "node16");
+                    g.addEdge("min211", "node17");
+                    g.addEdge("min221", "node18");
+                    g.addEdge("min221", "node19");
+                    g.addEdge("min222", "node20");
+                    g.addEdge("min222", "node21");
+                    g.addEdge("min223", "node22");
+                    g.addEdge("min223", "node23");
+                    g.addEdge("min223", "node24");
+                    g.addEdge("min231", "node25");
+                    g.addEdge("min231", "node26");
+                    g.addEdge("min232", "node27");
+                    g.addEdge("min232", "node28");
+                    g.addEdge("min311", "node29");
+                    g.addEdge("min311", "node30");
+                    g.addEdge("min312", "node31");
+                    g.addEdge("min312", "node32");
+                    g.addEdge("min312", "node33");
+                    g.addEdge("min321", "node34");
+                    g.addEdge("min321", "node35");
+                    g.addEdge("min321", "node36");
+                    redraw();
+                }
+                
+                function add6() {
+                
+                    for(var i in g.nodes) {
+                        var node = g.nodes[i];
+                        node.shape.items["1"].attr("text", "-");
+                       // node.shape.items["1"].attr("text", "-");
+                    }   
+                    
+                    setLabelsFromTerminal(root);
+                    
+                    redraw();
+                }
+                
+                function setTerminal(node, toSet, value) {
+                    if (node.isTerminal == true) {
+                        if(node.name == toSet) {
+                            //console.log(node.name+' node is set to '+value);
+                            node.value = value;
+                        }
+                        //console.log(node.value);
+                        //console.log(node.name);
+                        return node;
+                    }
+                    for(var i in node.children) {
+                        var child = node.children[i];
+                        setTerminal(child, toSet, value);
+                    }
+                    return node;
+                }
+                
+                function setLabelsFromTerminal(node) {
+                    if (node.isTerminal == true) {
+                        g.nodes[node.name].shape.items["1"].attr("text", node.value);
+                        return node;
+                    }
+                    for(var i in node.children) {
+                        var child = node.children[i];
+                        setLabelsFromTerminal(child);
+                    }
+                    return node;
+                }
+                
+                function getTerminals(node) {
+                    if (node.isTerminal == true) {
+                    console.log(node.value); 
+                        return node;
+                    }
+                    for(var i in node.children) {
+                        var child = node.children[i];
+                        getTerminals(child);
+                    }
+                    return node;
+                }
+                
+                function go() {
+                    for(var i in g.edges) {
+                        var edge = g.edges[i];
+                        edge.connection.fg.attr('stroke', '#ccc');
+                        
+                    }
+                    var result = alphabeta(root, 5, -999, 999, true, g);
+                }
+                
+        
             window.onload = function() {
                 var width = $(document).width() - 20;
                 var height = $(document).height() - 350;
-                $('#canvas').css('height', height);
-                $('#canvas').css('width', width);
-                
+                console.log(height, width);
+                var width = parseInt($('#canvas').css('width'),10);
+                var height = parseInt($('#canvas').css('height'),10);
+                                console.log(height, width);
                 g = new Graph();
                     
                 /* layout the graph using the Spring layout implementation */
@@ -132,357 +350,484 @@
                 */
                 
                 var node1 = new Node({
+                    name: 'node1',
                     isTerminal: true,
                     value: 5
                 });
                 
+                
                 var node2 = new Node({
+                    name: 'node2',
                     isTerminal: true,
                     value: 4
                 });
+
                 
                 var node3 = new Node({
+                    name: 'node3',
                     isTerminal: true,
                     value: 7
                 });
                 
                 var node4 = new Node({
+                    name: 'node4',
                     isTerminal: true,
                     value: 5
                 });
+
                 
                 var node5 = new Node({
+                    name: 'node5',
                     isTerminal: true,
                     value: 3
                 });
+
                 
                 var node6 = new Node({
+                    name: 'node6',
                     isTerminal: true,
                     value: 4
                 });
+
                 
                 var node7 = new Node({
+                    name: 'node7',
                     isTerminal: true,
                     value: 1
                 });
+
                 
                 var node8 = new Node({
+                    name: 'node8',
                     isTerminal: true,
                     value: 7
                 });
+
                 
                 var node9 = new Node({
+                    name: 'node9',
                     isTerminal: true,
                     value: 6
                 });
+
                 
                 var node10 = new Node({
+                    name: 'node10',
                     isTerminal: true,
                     value: 7
                 });
+
                 
                 var node11 = new Node({
+                    name: 'node11',
                     isTerminal: true,
                     value: 6
                 });
+
                 
                 var node12 = new Node({
+                    name: 'node12',
                     isTerminal: true,
                     value: 8
                 });
+
                 
                 var node13 = new Node({
+                    name: 'node13',
                     isTerminal: true,
                     value: 9
                 });
+
                 
                 var node14 = new Node({
+                    name: 'node14',
                     isTerminal: true,
                     value: 8
                 });
+
                 
                 var node15 = new Node({
+                    name: 'node15',
                     isTerminal: true,
                     value: 8
                 });
+
                 
                 var node16 = new Node({
+                    name: 'node16',
                     isTerminal: true,
                     value: 7
                 });
+
                 
                 var node17 = new Node({
+                    name: 'node17',
                     isTerminal: true,
                     value: 9
                 });
+
                 
                 var node18 = new Node({
+                    name: 'node18',
                     isTerminal: true,
                     value: 4
                 });
+
                 
                 var node19 = new Node({
+                    name: 'node19',
                     isTerminal: true,
                     value: 5
                 });
+
                 
                 var node20 = new Node({
+                    name: 'node20',
                     isTerminal: true,
                     value: 3
                 });
+
                 
                 var node21 = new Node({
+                    name: 'node21',
                     isTerminal: true,
                     value: 1
                 });
+
                 
                 var node22 = new Node({
-                    isTerminal: true,
-                    value: 2
-                });
-                
-                var node23 = new Node({
-                    isTerminal: true,
-                    value: 0
-                });
-                
-                var node24 = new Node({
-                    isTerminal: true,
-                    value: 1
-                });
-                
-                var node25 = new Node({
-                    isTerminal: true,
-                    value: 7
-                });
-                
-                var node26 = new Node({
-                    isTerminal: true,
-                    value: 6
-                });
-                
-                var node27 = new Node({
-                    isTerminal: true,
-                    value: 9
-                });
-                
-                var node28 = new Node({
-                    isTerminal: true,
-                    value: 8
-                });
-                
-                var node29 = new Node({
-                    isTerminal: true,
-                    value: 2
-                });
-                
-                var node30 = new Node({
-                    isTerminal: true,
-                    value: 5
-                });
-                
-                var node31 = new Node({
-                    isTerminal: true,
-                    value: 5
-                });
-                
-                var node32 = new Node({
-                    isTerminal: true,
-                    value: 4
-                });
-                
-                var node33 = new Node({
-                    isTerminal: true,
-                    value: 5
-                });
-                
-                var node34 = new Node({
-                    isTerminal: true,
-                    value: 2
-                });
-                
-                var node35 = new Node({
-                    isTerminal: true,
-                    value: 1
-                });
-                
-                var node36 = new Node({
+                    name: 'node22',
                     isTerminal: true,
                     value: 2
                 });
 
+                
+                var node23 = new Node({
+                    name: 'node23',
+                    isTerminal: true,
+                    value: 0
+                });
+
+                
+                var node24 = new Node({
+                    name: 'node24',
+                    isTerminal: true,
+                    value: 1
+                });
+
+                
+                var node25 = new Node({
+                    name: 'node25',
+                    isTerminal: true,
+                    value: 7
+                });
+
+                
+                var node26 = new Node({
+                    name: 'node26',
+                    isTerminal: true,
+                    value: 6
+                });
+
+                
+                var node27 = new Node({
+                    name: 'node27',
+                    isTerminal: true,
+                    value: 9
+                });
+
+                
+                var node28 = new Node({
+                    name: 'node28',
+                    isTerminal: true,
+                    value: 8
+                });
+
+                
+                var node29 = new Node({
+                    name: 'node29',
+                    isTerminal: true,
+                    value: 2
+                });
+
+                
+                var node30 = new Node({
+                    name: 'node30',
+                    isTerminal: true,
+                    value: 5
+                });
+
+                
+                var node31 = new Node({
+                    name: 'node31',
+                    isTerminal: true,
+                    value: 5
+                });
+
+                
+                var node32 = new Node({
+                    name: 'node32',
+                    isTerminal: true,
+                    value: 4
+                });
+
+                
+                var node33 = new Node({
+                    name: 'node33',
+                    isTerminal: true,
+                    value: 5
+                });
+
+                
+                var node34 = new Node({
+                    name: 'node34',
+                    isTerminal: true,
+                    value: 2
+                });
+
+                
+                var node35 = new Node({
+                    name: 'node35',
+                    isTerminal: true,
+                    value: 1
+                });
+                
+                
+                var node36 = new Node({
+                    name: 'node36',
+                    isTerminal: true,
+                    value: 2
+                });
+
+                console.dir(node36);
+                
                 var min111 = new Node({
+                    name: 'min111',
                     isTerminal: false,
                     children: [node1, node2],
                 });
                 
+                
                 var options = {
+                    name: 'min112',
                     isTerminal: false,
                     children: [node3, node4],
                 };
                 var min112 = new Node(options);
+
                 
                 var options = {
+                    name: 'min113',
                     isTerminal: false,
                     children: [node5, node6, node7],
                 };
                 var min113 = new Node(options);
+
                 
                 var options = {
+                    name: 'min121',
                     isTerminal: false,
                     children: [node8,node9],
                 };
                 var min121 = new Node(options);
+
                 
                 var options = {
+                    name: 'min122',
                     isTerminal: false,
                     children: [node10,node11,node12],
                 };
                 var min122 = new Node(options);
+
                 
                 var options = {
+                    name: 'min123',
                     isTerminal: false,
                     children: [node13, node14],
                 };
                 var min123 = new Node(options);
+
                 
                 var options = {
+                    name: 'min221',
                     isTerminal: false,
                     children: [node15, node16, node17],
                 };
                 var min211 = new Node(options);
+
                 
                 var options = {
+                    name: 'min221',
                     isTerminal: false,
                     children: [node18, node19],
                 };
                 var min221 = new Node(options);
-               
+
+                
                 var options = {
+                    name: 'min222',
                     isTerminal: false,
                     children: [node20, node21],
                 };
                 var min222 = new Node(options);
-               
+
+                
                 var options = {
+                    name: 'min223',
                     isTerminal: false,
                     children: [node22, node23, node24],
                 };
                 var min223 = new Node(options);
-               
+
+                
                 var options = {
+                    name: 'min231',
                     isTerminal: false,
                     children: [node25, node26],
                 };
                 var min231 = new Node(options);
+
                 
                 var options = {
+                    name: 'min232',
                     isTerminal: false,
                     children: [node27, node28],
                 };
                 var min232 = new Node(options);
-               
+
+                
                 var options = {
+                    name: 'min311',
                     isTerminal: false,
                     children: [node29, node30],
                 };
                 var min311 = new Node(options);
+
                 
                 var options = {
-                    isTerminal: false,
-                    children: [node29, node30],
-                };
-                var min311 = new Node(options);
-                
-                var options = {
+                    name: 'min312',
                     isTerminal: false,
                     children: [node31, node32, node33],
                 };
                 var min312 = new Node(options);
+
                 
                 var options = {
+                    name: 'min321',
                     isTerminal: false,
                     children: [node34, node35, node36],
                 };
                 var min321 = new Node(options);
+
                 
                 var options = {
+                    name: 'max11',
                     isTerminal: false,
                     children: [min111, min112, min113],
                 };
                 var max11 = new Node(options);
                 
+                
                 var options = {
+                    name: 'max12',
                     isTerminal: false,
                     children: [min121, min122, min123],
                 };
                 var max12 = new Node(options);
+
                 
                 var options = {
+                    name: 'max21',
                     isTerminal: false,
                     children: [min211],
                 };
                 var max21 = new Node(options);
+
                 
                 var options = {
+                    name: 'max22',
                     isTerminal: false,
                     children: [min221, min222, min223],
                 };
                 var max22 = new Node(options);
+
                 
                 var options = {
+                    name: 'max23',
                     isTerminal: false,
                     children: [min231, min232],
                 };
                 var max23 = new Node(options);
+
                 
                 var options = {
+                    name: 'max31',
                     isTerminal: false,
                     children: [min311, min312],
                 };
                 var max31 = new Node(options);
+
                 
                 var options = {
+                    name: 'max32',
                     isTerminal: false,
                     children: [min321],
                 };
                 var max32 = new Node(options);
+
                 
                 var options = {
+                    name: 'min1',
                     isTerminal: false,
                     children: [max11, max12],
                 };
                 var min1 = new Node(options);
                 
+                
                 var options = {
+                    name: 'min2',
                     isTerminal: false,
                     children: [max21, max22, max23],
                 };
                 var min2 = new Node(options);
                 
+                
                 var options = {
+                    name: 'min3',
                     isTerminal: false,
                     children: [max31, max32],
                 };
                 var min3 = new Node(options);
                 
+                
                 var options = {
+                    name: 'root',
                     isTerminal: false,
                     children: [min1, min2, min3],
                 };
-                var root = new Node(options);
+                root = new Node(options);
+                
+
+                
                 console.dir(root);
-                var result = alphabeta(root, 5, -999, 999, true);
-                console.log("result: "+result);
+                
+                //console.log("result: "+result);
+                
+                
+                
             }
         </script>
         <style>
             #canvas {
                 border: 2px solid #ccc;
+                width: 1329px;
+                height: 400px;
+                background-image: url("canvas_bg.png");
             }
         </style>
     </head>
     <body>
         <div id='canvas'></div>
+        <button value='bob'>Кнопки управления будут тут</button>
     </body>
 </html>

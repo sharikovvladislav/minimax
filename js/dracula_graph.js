@@ -253,8 +253,8 @@ Graph.Renderer.Raphael.prototype = {
             node.render = function(r, node) {
                 /* the default node drawing */
                 var color = '#ccc';//Raphael.getColor();
-                var rect = r.ellipse(0, 0, 20, 20).attr({fill: color, stroke: color, "stroke-width": 1});
-				var text = r.text(0, 0, node.id).attr({"font-size": "15px"});
+                var rect = r.ellipse(0, 0, 10, 10).attr({fill: color, stroke: color, "stroke-width": 1});
+				var text = r.text(0, 0, node.label || node.id).attr({"font-size": "15px"});
                 /* set DOM node ID */
                 rect.node.id = node.label || node.id;
                 shape = r.set().
