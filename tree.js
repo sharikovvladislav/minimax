@@ -28,7 +28,6 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
             }
         }
 
-        g.nodes[node.name].shape.items["1"].attr("text", alpha);
         return alpha;
     } else {
         console.log('minimizing');
@@ -43,7 +42,6 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
             }
         }
         
-        g.nodes[node.name].shape.items["1"].attr("text", beta);
         return beta;
     }
 }
