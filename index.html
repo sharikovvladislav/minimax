@@ -216,11 +216,12 @@
                 }
                 
                 function go() {
+                    /*
                     for(var i in g.edges) {
                         var edge = g.edges[i];
                         edge.connection.fg.attr('stroke', '#ccc');
-                        
                     }
+                    */
                     var result = alphabeta(root, 5, -999, 999, true, g);
                 }
                 
@@ -650,7 +651,7 @@
 
                 
                 var options = {
-                    name: 'min221',
+                    name: 'min211',
                     isTerminal: false,
                     children: [node15, node16, node17],
                 };

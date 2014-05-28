@@ -13,6 +13,8 @@ function Node(options) {
 }
 
 function alphabeta(node, depth, alpha, beta, isMax, g) {
+    g.nodes[node.name].shape.items['0'].attr('fill', 'green');
+
     if((depth == 0) || (node.isTerminal == true)) {
         return node.value;
     }
@@ -20,7 +22,7 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
         console.log('maximizing');
         for (var i in node.children) {
             var child = node.children[i];
-            console.log(child);
+            console.log(g.nodes[child.name]);
             alpha = Math.max(alpha, alphabeta(child, depth-1, alpha, beta, false, g));
             if(beta <= alpha) {
                 console.log('beta '+beta+' alpha '+alpha);
@@ -32,16 +34,14 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
     } else {
         console.log('minimizing');
         for (var i in node.children) {
-            console.log('1 child');
             var child = node.children[i];
-            console.log(child);
+            console.log(g.nodes[child.name]);
             beta = Math.min(beta, alphabeta(child, depth-1, alpha, beta, true, g));
             if (beta <= alpha) {
                 console.log('beta '+beta+' alpha '+alpha);
                 break;
             }
         }
-        
         return beta;
     }
 }
