@@ -267,8 +267,10 @@ Graph.Renderer.Raphael.prototype = {
         if(node.shapes) {
             // TODO ajax representation evaluation
         }
-
+        console.log(node);
         shape = node.render(this.r, node).hide();
+
+
 
         shape.attr({"fill-opacity": .6});
         /* re-reference to the node an element belongs to, needed for dragging all elements of a node */
@@ -276,10 +278,14 @@ Graph.Renderer.Raphael.prototype = {
         shape.mousedown(this.dragger);
 
         var box = shape.getBBox();
-		var randX = Math.floor(Math.random() * (this.width-20 - 20 + 1)) + 20;
-		var randY = Math.floor(Math.random() * (this.height-20 - 20 + 1)) + 20;
-        shape.translate(randX, randY)
-        //console.log(box,point);
+		//var randX = Math.floor(Math.random() * (this.width-20 - 20 + 1)) + 20;
+		//var randY = Math.floor(Math.random() * (this.height-20 - 20 + 1)) + 20;
+
+        var x = node.posX;
+        var y = node.posY;
+
+        shape.translate(x, y);
+
         node.hidden || shape.show();
         node.shape = shape;
     },

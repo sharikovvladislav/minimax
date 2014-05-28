@@ -11,84 +11,85 @@
         var nodes = {}; 
         var root;
                 function init() {
-                    
                     nodes['node1'] = eval('node1');;
                 }
         
                 function add1() {
-                    g.addNode("root", { label : "root" });
+                    g.addNode("root", { label : "root", posX: 700, posY: 35 });
                     
-                    g.addNode("min1", { label : "min1" });
-                    g.addNode("min2", { label : "min2" });
-                    g.addNode("min3", { label : "min3" });
+                    g.addNode("min1", { label : "min1", posX: 300, posY: 110 });
+                    g.addNode("min2", { label : "min2", posX: 767, posY: 110 });
+                    g.addNode("min3", { label : "min3", posX: 1167, posY: 110 });
                     redraw();
                 }
                 function add2() {
-                    g.addNode("max11", { label : "max11" });
-                    g.addNode("max12", { label : "max12" });
-                    g.addNode("max21", { label : "max21" });
-                    g.addNode("max22", { label : "max22" });
-                    g.addNode("max23", { label : "max23" });
-                    g.addNode("max31", { label : "max31" });
-                    g.addNode("max32", { label : "max32" });
+                    g.addNode("max11", { label : "max11", posX: 172, posY: 180   });
+                    g.addNode("max12", { label : "max12", posX: 440, posY: 180   });
+                    g.addNode("max21", { label : "max21", posX: 585, posY: 180   });
+                    g.addNode("max22", { label : "max22", posX: 765, posY: 180   });
+                    g.addNode("max23", { label : "max23", posX: 975, posY: 180   });
+                    g.addNode("max31", { label : "max31", posX: 1127, posY: 180   });
+                    g.addNode("max32", { label : "max32", posX: 1200, posY: 180  });
                     redraw();
                 }
                 function add3() {
-                    g.addNode("min111", { label : "min111" });
-                    g.addNode("min112", { label : "min112" });
-                    g.addNode("min113", { label : "min113" });
-                    g.addNode("min121", { label : "min121" });
-                    g.addNode("min122", { label : "min122" });
-                    g.addNode("min123", { label : "min123" });
-                    g.addNode("min211", { label : "min211" });
-                    g.addNode("min221", { label : "min221" });
-                    g.addNode("min222", { label : "min222" });
-                    g.addNode("min223", { label : "min223" });
-                    g.addNode("min231", { label : "min231" });
-                    g.addNode("min232", { label : "min232" });
-                    g.addNode("min311", { label : "min311" });
-                    g.addNode("min312", { label : "min312" });
-                    g.addNode("min321", { label : "min321" });
+                    g.addNode("min111", { label : "min111", posX: 68, posY: 260    });
+                    g.addNode("min112", { label : "min112", posX: 172, posY: 260    });
+                    g.addNode("min113", { label : "min113", posX: 260, posY: 260    });
+                    g.addNode("min121", { label : "min121", posX: 346, posY: 260    });
+                    g.addNode("min122", { label : "min122", posX: 433, posY: 260    });
+                    g.addNode("min123", { label : "min123", posX: 518, posY: 260    });
+                    g.addNode("min211", { label : "min211", posX: 611, posY: 260    });
+                    g.addNode("min221", { label : "min221", posX: 697, posY: 260    });
+                    g.addNode("min222", { label : "min222", posX: 765, posY: 260    });
+                    g.addNode("min223", { label : "min223", posX: 854, posY: 260    });
+                    g.addNode("min231", { label : "min231", posX: 941, posY: 260    });
+                    g.addNode("min232", { label : "min232", posX: 1014, posY: 260    });
+                    g.addNode("min311", { label : "min311", posX: 1081, posY: 260    });
+                    g.addNode("min312", { label : "min312", posX: 1169, posY: 260    });
+                    g.addNode("min321", { label : "min321", posX: 1266, posY: 260    });
                     redraw();
                 }
 
                 function add4() {
-                    g.addNode("node1", { label : "node1" });
-                    g.addNode("node2", { label : "node2" });
-                    g.addNode("node3", { label : "node3" });
-                    g.addNode("node4", { label : "node4" });
-                    g.addNode("node5", { label : "node5" });
-                    g.addNode("node6", { label : "node6" });
-                    g.addNode("node7", { label : "node7" });
-                    g.addNode("node8", { label : "node8" });
-                    g.addNode("node9", { label : "node9" });
-                    g.addNode("node10", { label : "node10" });
-                    g.addNode("node11", { label : "node11" });
-                    g.addNode("node12", { label : "node12" });
-                    g.addNode("node13", { label : "node13" });
-                    g.addNode("node14", { label : "node14" });
-                    g.addNode("node15", { label : "node15" });
-                    g.addNode("node16", { label : "node16" });
-                    g.addNode("node17", { label : "node17" });
-                    g.addNode("node18", { label : "node18" });
-                    g.addNode("node19", { label : "node19" });
-                    g.addNode("node20", { label : "node20" });
-                    g.addNode("node21", { label : "node21" });
-                    g.addNode("node22", { label : "node22" });
-                    g.addNode("node23", { label : "node23" });
-                    g.addNode("node24", { label : "node24" });
-                    g.addNode("node25", { label : "node25" });
-                    g.addNode("node26", { label : "node26" });
-                    g.addNode("node27", { label : "node27" });
-                    g.addNode("node28", { label : "node28" });
-                    g.addNode("node29", { label : "node29" });
-                    g.addNode("node30", { label : "node30" });
-                    g.addNode("node31", { label : "node31" });
-                    g.addNode("node32", { label : "node32" });
-                    g.addNode("node33", { label : "node33" });
-                    g.addNode("node34", { label : "node34" });
-                    g.addNode("node35", { label : "node35" });
-                    g.addNode("node36", { label : "node36" });
+                    var startPos = 50;
+                    var offset = 35;
+                    g.addNode("node1", { label : "node1", posX: startPos+offset*0, posY: 355     });
+                    g.addNode("node2", { label : "node2", posX: startPos+offset*1, posY: 355     });
+                    g.addNode("node3", { label : "node3", posX: startPos+offset*3, posY: 355     });
+                    g.addNode("node4", { label : "node4", posX: startPos+offset*4, posY: 355     });
+                    g.addNode("node5", { label : "node5", posX: startPos+offset*5, posY: 355     });
+                    g.addNode("node6", { label : "node6", posX: startPos+offset*6, posY: 355     });
+                    g.addNode("node7", { label : "node7", posX: startPos+offset*7, posY: 355     });
+                    g.addNode("node8", { label : "node8", posX: startPos+offset*8, posY: 355     });
+                    g.addNode("node9", { label : "node9", posX: startPos+offset*9, posY: 355     });
+                    g.addNode("node10", { label : "node10", posX: startPos+offset*10, posY: 355     });
+                    g.addNode("node11", { label : "node11", posX: startPos+offset*11, posY: 355     });
+                    g.addNode("node12", { label : "node12", posX: startPos+offset*12, posY: 355     });
+                    g.addNode("node13", { label : "node13", posX: startPos+offset*13, posY: 355     });
+                    g.addNode("node14", { label : "node14", posX: startPos+offset*14, posY: 355     });
+                    g.addNode("node15", { label : "node15", posX: startPos+offset*15, posY: 355     });
+                    g.addNode("node16", { label : "node16", posX: startPos+offset*16, posY: 355     });
+                    g.addNode("node17", { label : "node17", posX: startPos+offset*17, posY: 355     });
+                    g.addNode("node18", { label : "node18", posX: startPos+offset*18, posY: 355     });
+                    g.addNode("node19", { label : "node19", posX: startPos+offset*19, posY: 355     });
+                    g.addNode("node20", { label : "node20", posX: startPos+offset*20, posY: 355     });
+                    g.addNode("node21", { label : "node21", posX: startPos+offset*21, posY: 355     });
+                    g.addNode("node22", { label : "node22", posX: startPos+offset*22, posY: 355     });
+                    g.addNode("node23", { label : "node23", posX: startPos+offset*23, posY: 355     });
+                    g.addNode("node24", { label : "node24", posX: startPos+offset*24, posY: 355     });
+                    g.addNode("node25", { label : "node25", posX: startPos+offset*25, posY: 355     });
+                    g.addNode("node26", { label : "node26", posX: startPos+offset*26, posY: 355     });
+                    g.addNode("node27", { label : "node27", posX: startPos+offset*27, posY: 355     });
+                    g.addNode("node28", { label : "node28", posX: startPos+offset*28, posY: 355     });
+                    g.addNode("node29", { label : "node29", posX: startPos+offset*29, posY: 355     });
+                    g.addNode("node30", { label : "node30", posX: startPos+offset*30, posY: 355     });
+                    g.addNode("node31", { label : "node31", posX: startPos+offset*31, posY: 355     });
+                    g.addNode("node32", { label : "node32", posX: startPos+offset*32, posY: 355     });
+                    g.addNode("node33", { label : "node33", posX: startPos+offset*33, posY: 355     });
+                    g.addNode("node34", { label : "node34", posX: startPos+offset*34, posY: 355     });
+                    g.addNode("node35", { label : "node35", posX: startPos+offset*35, posY: 355     });
+                    g.addNode("node36", { label : "node36", posX: startPos+offset*36, posY: 355     });
                     redraw();
                 }
                 
