@@ -33,12 +33,14 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
 			g.nodes[node.name].shape.items['1'].attr('text', maximum+'');
             if(beta <= alpha) {
                 //console.log('beta '+beta+' alpha '+alpha);
-				console.log('beta cut-off ('+beta+'<='+alpha+'), others children wouldn\'t be visited');
+				console.log('beta cut-off ('+beta+'<='+alpha+'), others children of '+g.nodes[node.name].parent+' wouldn\'t be visited');
                 break;
             }
         }
         
 		g.nodes[node.name].shape.items['0'].attr('fill', 'blue');
+
+        node.value = beta;
 
 		console.log('returning alpha, node '+node.name+' value is set as '+node.value);
 		console.log('going back to node '+g.nodes[node.name].parent)
@@ -57,13 +59,15 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
 			console.log('beta value is set to '+beta);
             if (beta <= alpha) {
                 //console.log('beta '+beta+' alpha '+alpha);
-				console.log('alpha cut-off ('+beta+'<='+alpha+'), others children wouldn\'t be visited');
+				console.log('alpha cut-off ('+beta+'<='+alpha+'), others children of '+g.nodes[node.name].parent+' wouldn\'t be visited');
                 break;
             }
         }
         
 		g.nodes[node.name].shape.items['0'].attr('fill', 'red');
-		
+
+        node.value = beta;
+
 		console.log('returning beta, node '+node.name+' value is set as '+node.value);
 		console.log('going back to node '+g.nodes[node.name].parent);
         return beta;
