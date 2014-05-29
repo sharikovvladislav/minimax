@@ -20,42 +20,32 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
         return node.value;
     }
     if(isMax) {
-		
         console.log('maximizing ('+node.name+')');
-		var maximum = -999;
+
         for (var i in node.children) {
             var child = node.children[i];
-            //console.log(g.nodes[child.name]);
-			var childValue = alphabeta(child, depth-1, alpha, beta, false, g);
-            alpha = Math.max(alpha, childValue);
-			var maximum = Math.max(maximum, childValue);
+            alpha = Math.max(alpha, alphabeta(child, depth-1, alpha, beta, false, g));
 			console.log('alpha value is set to '+alpha);
-			g.nodes[node.name].shape.items['1'].attr('text', maximum+'');
             if(beta <= alpha) {
-                //console.log('beta '+beta+' alpha '+alpha);
 				console.log('beta cut-off ('+beta+'<='+alpha+'), others children of '+g.nodes[node.name].parent+' wouldn\'t be visited');
                 break;
             }
         }
-        
+
+        g.nodes[node.name].shape.items['1'].attr('text', alpha);
 		g.nodes[node.name].shape.items['0'].attr('fill', 'blue');
 
-        node.value = beta;
+        node.value = alpha;
 
 		console.log('returning alpha, node '+node.name+' value is set as '+node.value);
 		console.log('going back to node '+g.nodes[node.name].parent)
         return alpha;
     } else {
-		
         console.log('minimizing ('+node.name+')');
-		var minimum = 999;
+
         for (var i in node.children) {
             var child = node.children[i];
-            //console.log(g.nodes[child.name]);
-			var childValue = alphabeta(child, depth-1, alpha, beta, true, g);
-            beta = Math.min(beta, childValue);
-			minimum = Math.min(minimum, childValue);
-			g.nodes[node.name].shape.items['1'].attr('text', minimum);
+            beta = Math.min(beta, alphabeta(child, depth-1, alpha, beta, true, g));
 			console.log('beta value is set to '+beta);
             if (beta <= alpha) {
                 //console.log('beta '+beta+' alpha '+alpha);
@@ -65,6 +55,7 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
         }
         
 		g.nodes[node.name].shape.items['0'].attr('fill', 'red');
+        g.nodes[node.name].shape.items['1'].attr('text', beta);
 
         node.value = beta;
 
