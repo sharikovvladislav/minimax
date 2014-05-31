@@ -30,7 +30,7 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
             alpha = Math.max(alpha, childValue);
 			var maximum = Math.max(maximum, childValue);
 			console.log('alpha value is set to '+alpha);
-			g.nodes[node.name].shape.items['1'].attr('text', maximum+'');
+			g.nodes[node.name].shape.items['1'].attr('text', maximum+' (max)');
             if(beta <= alpha) {
                 //console.log('beta '+beta+' alpha '+alpha);
 				console.log('beta cut-off ('+beta+'<='+alpha+'), others children of '+g.nodes[node.name].parent+' wouldn\'t be visited');
@@ -55,7 +55,7 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
 			var childValue = alphabeta(child, depth-1, alpha, beta, true, g);
             beta = Math.min(beta, childValue);
 			minimum = Math.min(minimum, childValue);
-			g.nodes[node.name].shape.items['1'].attr('text', minimum);
+			g.nodes[node.name].shape.items['1'].attr('text', minimum+' (minimum)');
 			console.log('beta value is set to '+beta);
             if (beta <= alpha) {
                 //console.log('beta '+beta+' alpha '+alpha);
