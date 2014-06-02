@@ -938,6 +938,15 @@
                     $("input#nodeValue").val(getTerminalValue(node));
                 });
 
+                $("select#nodeName option").hover(function() {
+                            var nodeName = $(this, ":selected").val();
+                            g.nodes[nodeName].shape.items['0'].attr('fill', 'black');
+                        }, function() {
+                            var nodeName = $(this, ":selected").val();
+                            g.nodes[nodeName].shape.items['0'].attr('fill', '#ccc');
+                        }
+                );
+
                 $("button#start").on('click', function() {
                     if(isSettingValues == true) {
                         alert("Закончите изменение значений!")
