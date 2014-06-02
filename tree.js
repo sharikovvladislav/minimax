@@ -35,6 +35,7 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
             if(beta <= alpha) {
                 //console.log('beta '+beta+' alpha '+alpha);
 				console.log('beta cut-off ('+beta+'<='+alpha+'), others children of '+g.nodes[node.name].parent+' wouldn\'t be visited');
+                output += "<p>Бета-отсечение: "+beta+" <= "+alpha+"</p>";
                 break;
             }
         }
@@ -67,6 +68,7 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
             if (beta <= alpha) {
                 //console.log('beta '+beta+' alpha '+alpha);
 				console.log('alpha cut-off ('+beta+'<='+alpha+'), others children of '+g.nodes[node.name].parent+' wouldn\'t be visited');
+                output += "<p>Узел: "+node.name+", Альфа-отсечение: "+beta+" <= "+alpha+"</p>";
                 break;
             }
         }

@@ -11,6 +11,8 @@
                 var root;
                 var isSettingValues = false;
                 var isStarted = false;
+                var output = "";
+
                 function init() {
                     add1();
                     add2();
@@ -895,7 +897,7 @@
                 //console.log("result: "+result);
                 
                 
-                init();
+                //init();
 
                 $("button#startSetUp").on('click', function() {
                     if(isStarted == true) {
@@ -959,11 +961,14 @@
                         isStarted = true;
                         $(this).html("Сброс");
                         console.log('запуск алгоритма')
+                        $("#results").html(output);
                     } else {
                         reset();
                         isStarted = false;
                         $(this).html("Запуск");
-                        console.log("сброс алгоритма")
+                        console.log("сброс алгоритма");
+                        $("#results").html("");
+                        output = "";
                     }
                 });
             }
