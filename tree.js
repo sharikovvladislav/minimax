@@ -1,5 +1,3 @@
-
-
 function Node(options) {
     this.name = options.name;
     this.isTerminal = options.isTerminal || null;
@@ -23,24 +21,30 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
 		
         console.log('maximizing ('+node.name+')');
 		var maximum = -999;
+        var maxArray = [];
         for (var i in node.children) {
             var child = node.children[i];
             //console.log(g.nodes[child.name]);
-			var childValue = alphabeta(child, depth-1, alpha, beta, false, g);
-            alpha = Math.max(alpha, childValue);
-			var maximum = Math.max(maximum, childValue);
+
+            alpha = Math.max(alpha, alphabeta(child, depth-1, alpha, beta, false, g));
+            var childValue = child.value;
+			maximum = Math.max(maximum, childValue);
+            maxArray.push(childValue);
 			console.log('alpha value is set to '+alpha);
-			g.nodes[node.name].shape.items['1'].attr('text', maximum+' (max)');
+			//g.nodes[node.name].shape.items['1'].attr('text', maximum+'');
             if(beta <= alpha) {
                 //console.log('beta '+beta+' alpha '+alpha);
 				console.log('beta cut-off ('+beta+'<='+alpha+'), others children of '+g.nodes[node.name].parent+' wouldn\'t be visited');
                 break;
             }
         }
-        
-		g.nodes[node.name].shape.items['0'].attr('fill', 'blue');
+        console.log(node.name+' — maximum of childs of '+node.name+' is '+maximum);
+        console.log(node.name+' — childs of node '+node.name+":");
+        console.log(JSON.stringify(maxArray));
+		//g.nodes[node.name].shape.items['0'].attr('fill', 'blue');
 
-        node.value = beta;
+        node.value = Math.max.apply(Math, maxArray);
+        g.nodes[node.name].shape.items['1'].attr('text', node.value);
 
 		console.log('returning alpha, node '+node.name+' value is set as '+node.value);
 		console.log('going back to node '+g.nodes[node.name].parent)
@@ -49,13 +53,16 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
 		
         console.log('minimizing ('+node.name+')');
 		var minimum = 999;
+        var minArray = [];
         for (var i in node.children) {
             var child = node.children[i];
             //console.log(g.nodes[child.name]);
-			var childValue = alphabeta(child, depth-1, alpha, beta, true, g);
-            beta = Math.min(beta, childValue);
+
+            beta = Math.min(beta, alphabeta(child, depth-1, alpha, beta, true, g));
+            var childValue = child.value;
 			minimum = Math.min(minimum, childValue);
-			g.nodes[node.name].shape.items['1'].attr('text', minimum+' (minimum)');
+            minArray.push(childValue);
+			//g.nodes[node.name].shape.items['1'].attr('text', minimum+'');
 			console.log('beta value is set to '+beta);
             if (beta <= alpha) {
                 //console.log('beta '+beta+' alpha '+alpha);
@@ -63,12 +70,15 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
                 break;
             }
         }
-        
-		g.nodes[node.name].shape.items['0'].attr('fill', 'red');
+        console.log(node.name+' — minimum of childs of '+node.name+' is '+minimum);
+        console.log(node.name+' — childs of node '+node.name+":");
+        console.log(JSON.stringify(minArray));
+		//g.nodes[node.name].shape.items['0'].attr('fill', 'red');
 
-        node.value = beta;
+        node.value = Math.min.apply(Math, minArray);
+        g.nodes[node.name].shape.items['1'].attr('text', node.value);
 
-		console.log('returning beta, node '+node.name+' value is set as '+node.value);
+		console.log('returning beta, minimal node is '+node.value+', node '+node.name+' value is set as '+node.value);
 		console.log('going back to node '+g.nodes[node.name].parent);
         return beta;
     }
