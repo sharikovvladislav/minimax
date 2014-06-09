@@ -49,7 +49,7 @@ function alphabeta(node, depth, alpha, beta, isMax, g) {
 		console.log('returning alpha, node '+node.name+' value is set as '+node.value);
 		console.log('going back to node '+g.nodes[node.name].parent)
         return alpha;
-    } else {
+	} else {
 		
         console.log('minimizing ('+node.name+')');
 		var minimum = 999;

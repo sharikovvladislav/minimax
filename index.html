@@ -1,7 +1,7 @@
 <html>
     <head>
         <script src="tree.js"></script>
-        	<!-- for graph dracula framework -->
+        <!-- for graph dracula framework -->
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <script type="text/javascript" src="js/jquery_bob.js"></script>
         <script type="text/javascript" src="js/raphael-min.js"></script>
@@ -10,7 +10,16 @@
         <script>
                 var root;
                 var isSettingValues = false;
-                var isStarted = false;
+                var isMinimaxStarted = false;
+				var isAlphaBetaStarted = false;
+				
+				function isAlgorithmsStarted() {
+					if(isAlphaBetaStarted == true || isMinimaxStarted == true) {
+						return true;
+					}
+					return false;
+				}
+				
                 function init() {
                     add1();
                     add2();
@@ -289,7 +298,7 @@
                     return node;
                 }
                 
-                function go() {
+                function goAlphaBeta() {
                     /*
                     for(var i in g.edges) {
                         var edge = g.edges[i];
@@ -304,6 +313,22 @@
                     var result = alphabeta(root, 1000, -999, 999, true, g);
                 }
                 
+                function goMinimax() {
+                    /*
+                    for(var i in g.edges) {
+                        var edge = g.edges[i];
+                        edge.connection.fg.attr('stroke', '#ccc');
+                    }
+                    */
+					
+					for(var i in g.nodes) {
+						var node = g.nodes[i];
+						node.shape.items["0"].attr("fill", "#aaa");
+					}
+                    var result = minimax(root, 5, true);
+                }
+                
+				
         
             window.onload = function() {
                 var width = $(document).width() - 20;
@@ -898,8 +923,8 @@
                 init();
 
                 $("button#startSetUp").on('click', function() {
-                    if(isStarted == true) {
-                        alert("Ошибка! Сначала сбросьте алгоритм!");
+                    if(isAlgorithmsStarted()) {
+                        alert("Ошибка! Сначала сбросьте алгоритмы!");
                         return;
                     }
 
@@ -947,23 +972,53 @@
                         }
                 );
 
-                $("button#start").on('click', function() {
+                $("button#startAlphaBeta").on('click', function() {
+                    if(isSettingValues == true) {
+                        alert("Закончите изменение значений!")
+                        console.log("устанавливаются значения, нельзя запускать алгоритм");
+                        return;
+                    }
+					
+					if(isMinimaxStarted == true) {
+						alert("Сначала сбросьте минимакс");
+						return;
+					}
+					
+                    if(isAlphaBetaStarted == false) {					
+                        goAlphaBeta();
+                        isAlphaBetaStarted = true;
+                        $(this).html("Сброс альфабета");
+                        console.log('запуск алгоритма альфабета')
+                    } else {
+                        reset();
+                        isAlphaBetaStarted = false;
+                        $(this).html("Запуск альфабета");
+                        console.log("сброс алгоритма альфабета")
+                    }
+                });
+				
+                $("button#startMinimax").on('click', function() {
                     if(isSettingValues == true) {
                         alert("Закончите изменение значений!")
                         console.log("устанавливаются значения, нельзя запускать алгоритм");
                         return;
                     }
 
-                    if(isStarted == false) {
-                        go();
-                        isStarted = true;
-                        $(this).html("Сброс");
-                        console.log('запуск алгоритма')
+					if(isAlphaBetaStarted == true) {
+						alert("Сначала сбросьте альфабета");
+						return;
+					}
+					
+                    if(isMinimaxStarted == false) {
+                        goMinimax();
+                        isMinimaxStarted = true;
+                        $(this).html("Сброс минимакс");
+                        console.log('запуск алгоритма минимакс')
                     } else {
                         reset();
-                        isStarted = false;
-                        $(this).html("Запуск");
-                        console.log("сброс алгоритма")
+                        isMinimaxStarted = false;
+                        $(this).html("Запуск минимакс");
+                        console.log("сброс алгоритма минимакс")
                     }
                 });
             }
@@ -1004,7 +1059,8 @@
                 <fieldset>
                     <legend>Общие настройки</legend>
                     <fieldset>
-                        <button id="start">Запуск</button>
+                        <button id="startAlphaBeta">Запуск альфабета</button>
+						<button id="startMinimax">Запуск минимакс</button>
                     </fieldset>
                 </fieldset>
             </div>
