@@ -8,8 +8,9 @@
         <script type="text/javascript" src="js/dracula_graffle.js"></script>
         <script type="text/javascript" src="js/dracula_graph.js"></script>
         <script>
-        var nodes = {}; 
-        var root;
+                var root;
+                var isSettingValues = false;
+                var isStarted = false;
                 function init() {
                     add1();
                     add2();
@@ -17,6 +18,8 @@
                     add4();
                     add5();
                     add6();
+                    createPointer("node36");
+                    g.nodes["pointer"].shape.hide();
                 }
         
                 function add1() {
@@ -38,7 +41,7 @@
                     redraw();
                 }
                 function add3() {
-                    g.addNode("min111", { label : "min111", parent: "max11", posX: 68, posY: 260    });
+                    g.addNode("min111", { label : "min111", parent: "max11", posX: 102, posY: 260    });
                     g.addNode("min112", { label : "min112", parent: "max11", posX: 172, posY: 260    });
                     g.addNode("min113", { label : "min113", parent: "max11", posX: 260, posY: 260    });
                     g.addNode("min121", { label : "min121", parent: "max12", posX: 346, posY: 260    });
@@ -59,8 +62,8 @@
                 function add4() {
                     var startPos = 50;
                     var offset = 35;
-                    g.addNode("node1", { label : "node1", parent: "min111", posX: startPos+offset*0, posY: 355     });
-                    g.addNode("node2", { label : "node2", parent: "min111", posX: startPos+offset*1, posY: 355     });
+                    g.addNode("node1", { label : "node1", parent: "min111", posX: startPos+offset*1, posY: 355     });
+                    g.addNode("node2", { label : "node2", parent: "min111", posX: startPos+offset*2, posY: 355     });
                     g.addNode("node3", { label : "node3", parent: "min112", posX: startPos+offset*3, posY: 355     });
                     g.addNode("node4", { label : "node4", parent: "min112", posX: startPos+offset*4, posY: 355     });
                     g.addNode("node5", { label : "node5", parent: "min113", posX: startPos+offset*5, posY: 355     });
@@ -172,11 +175,36 @@
                         var node = g.nodes[i];
                         node.shape.items["1"].attr("text", "-");
                        // node.shape.items["1"].attr("text", "-");
-                    }   
-                    
+                    }
+
+
                     setLabelsFromTerminal(root);
                     
                     redraw();
+                }
+
+                function reset() {
+                    for(var i in g.nodes) {
+                        var node = g.nodes[i];
+                        node.shape.items["1"].attr("text", "-");
+                        node.shape.items['0'].attr('fill', '#ccc');
+                        // node.shape.items["1"].attr("text", "-");
+                    }
+                    resetTree(root);
+                    setLabelsFromTerminal(root);
+                    redraw();
+                }
+
+                function resetTree(node) {
+                    if (node.isTerminal == true) {
+                        return node;
+                    }
+                    for(var i in node.children) {
+                        var child = node.children[i];
+                        resetTree(child);
+                    }
+                    node.value = null;
+                    return node;
                 }
                 
 				function getParentNode(node, findMe) {
@@ -189,24 +217,53 @@
 					}
 					return node;
 				}
-				
-                function setTerminal(node, toSet, value) {
-                    if (node.isTerminal == true) {
-                        if(node.name == toSet) {
-                            //console.log(node.name+' node is set to '+value);
-                            node.value = value;
+
+                function setTerminalValue(toSet, value) {
+                    var node = root;
+                    setTerminal(node, toSet, value);
+                    function setTerminal(node, toSet, value) {
+                        if (node.isTerminal == true) {
+                            if(node.name == toSet) {
+                                //console.log(node.name+' node is set to '+value);
+                                node.value = value;
+                            }
+                            //console.log(node.value);
+                            //console.log(node.name);
+                            return node;
                         }
-                        //console.log(node.value);
-                        //console.log(node.name);
+                        for(var i in node.children) {
+                            var child = node.children[i];
+                            setTerminal(child, toSet, value);
+                        }
                         return node;
                     }
-                    for(var i in node.children) {
-                        var child = node.children[i];
-                        setTerminal(child, toSet, value);
-                    }
-                    return node;
+                    setLabelsFromTerminal(root);
+                    redraw();
                 }
-                
+
+                function getTerminalValue(toGet) {
+                    var node = root;
+                    var value;
+                    getTerminalValueHelper(node, toGet);
+                    function getTerminalValueHelper(node, toGet) {
+                        if (node.isTerminal == true) {
+                            if(node.name == toGet) {
+                                //console.log(node.name+' node is set to '+value);
+                                value = node.value;
+                            }
+                            //console.log(node.value);
+                            //console.log(node.name);
+                            return node;
+                        }
+                        for(var i in node.children) {
+                            var child = node.children[i];
+                            getTerminalValueHelper(child, toGet);
+                        }
+                        return node;
+                    }
+                    return value;
+                }
+
                 function setLabelsFromTerminal(node) {
                     if (node.isTerminal == true) {
                         g.nodes[node.name].shape.items["1"].attr("text", node.value);
@@ -838,7 +895,96 @@
                 //console.log("result: "+result);
                 
                 
-                
+                init();
+
+                $("button#startSetUp").on('click', function() {
+                    if(isStarted == true) {
+                        alert("Ошибка! Сначала сбросьте алгоритм!");
+                        return;
+                    }
+
+                    if($("fieldset#settingValues").prop("disabled") == true) {
+                        $("fieldset#settingValues").prop("disabled", "");
+                        $(this).html("Закончить изменение узлов");
+                        console.log('начало изменения узлов');
+                        isSettingValues = true;
+                        var nodeName = $("select#nodeName :selected").val();
+                        showPointer(nodeName);
+                        $("input#nodeValue").val(getTerminalValue(nodeName));
+                    } else {
+                        $("fieldset#settingValues").prop("disabled", "true");
+                        $(this).html("Установить значения");
+                        console.log('изменение узлов закончено');
+                        isSettingValues = false;
+                        hidePointer();
+                    }
+                });
+
+                $("button#setValue").on('click', function() {
+                    var value = parseInt($("input#nodeValue").val(), 10) || null;
+                    var nodeName = $("select#nodeName :selected").val();
+                    if(value == null) {
+                        alert("Введено неправильное значение! Введите число!");
+                        return;
+                    }
+                    setTerminalValue(nodeName, value);
+                    //alert("set value "+value+" for node "+nodeName);
+                });
+
+                $("select#nodeName").on('change', function() {
+                    var node = $(this, ":selected").val();
+                    console.log('changing pointer to '+node);
+                    showPointer(node);
+                    $("input#nodeValue").val(getTerminalValue(node));
+                });
+
+                $("select#nodeName option").hover(function() {
+                            var nodeName = $(this, ":selected").val();
+                            g.nodes[nodeName].shape.items['0'].attr('fill', 'black');
+                        }, function() {
+                            var nodeName = $(this, ":selected").val();
+                            g.nodes[nodeName].shape.items['0'].attr('fill', '#ccc');
+                        }
+                );
+
+                $("button#start").on('click', function() {
+                    if(isSettingValues == true) {
+                        alert("Закончите изменение значений!")
+                        console.log("устанавливаются значения, нельзя запускать алгоритм");
+                        return;
+                    }
+
+                    if(isStarted == false) {
+                        go();
+                        isStarted = true;
+                        $(this).html("Сброс");
+                        console.log('запуск алгоритма')
+                    } else {
+                        reset();
+                        isStarted = false;
+                        $(this).html("Запуск");
+                        console.log("сброс алгоритма")
+                    }
+                });
+            }
+            function createPointer(nodeName) {
+                var pos = parseInt(nodeName.substring(4), 10);
+                var startPos = 50;
+                var offset = 35;
+                g.addNode("pointer", { label : "-", posX: startPos+offset*pos, posY: 380     });
+                redraw();
+            }
+            function showPointer(nodeName) {
+                var pos = parseInt(nodeName.substring(4), 10);
+                var startPos = 50;
+                var offset = 35;
+                g.nodes["pointer"].shape["0"].attr("cx", startPos+offset*pos);
+                g.nodes["pointer"].shape["1"].attr("x", startPos+offset*pos-0.5);
+                g.nodes["pointer"].show();
+                redraw();
+            }
+            function hidePointer() {
+                g.nodes["pointer"].hide();
             }
         </script>
         <style>
@@ -852,6 +998,66 @@
     </head>
     <body>
         <div id='canvas'></div>
-        <button value='bob'>Кнопки управления будут тут</button>
+        <fieldset>
+            <legend>Управление</legend>
+            <div style="float: left; width: 30%;">
+                <fieldset>
+                    <legend>Общие настройки</legend>
+                    <fieldset>
+                        <button id="start">Запуск</button>
+                    </fieldset>
+                </fieldset>
+            </div>
+            <div style="width: 100%;">
+                <fieldset>
+                    <legend>Установка значений узлов</legend>
+                    <fieldset style="float: left;">
+                        <button id="startSetUp">Установить значения</button>
+                    </fieldset>
+                    <fieldset id="settingValues" style="margin-left: 200px;" disabled>
+                        <select id="nodeName">
+                            <option value="node1">node1</option>
+                            <option value="node2">node2</option>
+                            <option value="node3">node3</option>
+                            <option value="node4">node4</option>
+                            <option value="node5">node5</option>
+                            <option value="node6">node6</option>
+                            <option value="node7">node7</option>
+                            <option value="node8">node8</option>
+                            <option value="node9">node9</option>
+                            <option value="node10">node10</option>
+                            <option value="node11">node11</option>
+                            <option value="node12">node12</option>
+                            <option value="node13">node13</option>
+                            <option value="node14">node14</option>
+                            <option value="node15">node15</option>
+                            <option value="node16">node16</option>
+                            <option value="node17">node17</option>
+                            <option value="node18">node18</option>
+                            <option value="node19">node19</option>
+                            <option value="node20">node20</option>
+                            <option value="node21">node21</option>
+                            <option value="node22">node22</option>
+                            <option value="node23">node23</option>
+                            <option value="node24">node24</option>
+                            <option value="node25">node25</option>
+                            <option value="node26">node26</option>
+                            <option value="node27">node27</option>
+                            <option value="node28">node28</option>
+                            <option value="node29">node29</option>
+                            <option value="node30">node30</option>
+                            <option value="node31">node31</option>
+                            <option value="node32">node32</option>
+                            <option value="node33">node33</option>
+                            <option value="node34">node34</option>
+                            <option value="node35">node35</option>
+                            <option value="node36">node36</option>
+                        </select>
+                        <input id="nodeValue" type="text" size="10"/>
+                        <button id="setValue">Применить значение</button>
+                    </fieldset>
+                </fieldset>
+            </div>
+        </fieldset>
     </body>
 </html>
