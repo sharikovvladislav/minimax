@@ -10,6 +10,35 @@ function Node(options) {
 
 }
 
+function alphabeta_blank(node, depth, alpha, beta, isMax, g) {
+    g.nodes[node.name].shape.items['0'].attr('fill', 'green');
+
+    if((depth == 0) || (node.isTerminal == true)) {
+        return node.value;
+    }
+    if(isMax) {
+        for (var i in node.children) {
+            var child = node.children[i];
+            alpha = Math.max(alpha, alphabeta_blank(child, depth-1, alpha, beta, false, g));
+            if(beta <= alpha) {
+                break;
+            }
+        }
+        node.value = alpha;
+        return alpha;
+	} else {
+        for (var i in node.children) {
+            var child = node.children[i];
+            beta = Math.min(beta, alphabeta_blank(child, depth-1, alpha, beta, true, g));
+            if (beta <= alpha) {
+                break;
+            }
+        }
+        node.value = beta;
+        return beta;
+    }
+}
+
 function alphabeta(node, depth, alpha, beta, isMax, g) {
     g.nodes[node.name].shape.items['0'].attr('fill', 'green');
 
