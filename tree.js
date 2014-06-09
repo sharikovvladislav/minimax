@@ -24,7 +24,6 @@ function alphabeta_blank(node, depth, alpha, beta, isMax, g) {
                 break;
             }
         }
-        node.value = alpha;
         return alpha;
 	} else {
         for (var i in node.children) {
@@ -34,7 +33,6 @@ function alphabeta_blank(node, depth, alpha, beta, isMax, g) {
                 break;
             }
         }
-        node.value = beta;
         return beta;
     }
 }
